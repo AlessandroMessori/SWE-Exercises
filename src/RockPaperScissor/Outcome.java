@@ -1,5 +1,6 @@
 package RockPaperScissor;
 
+
 public enum Outcome {
     WINNER("Hai vinto!"), LOSER("Hai perso!"), DRAW("Parita'!");
 

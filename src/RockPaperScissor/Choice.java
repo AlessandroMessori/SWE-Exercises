@@ -1,5 +1,6 @@
 package RockPaperScissor;
 
+
 import java.util.Random;
 
 public enum Choice {

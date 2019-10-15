@@ -1,5 +1,6 @@
 package RockPaperScissor;
 
+
 import java.io.InputStream;
 import java.util.Scanner;
 import java.util.Random;
@@ -16,7 +17,7 @@ public class GameLogic {
         this.scanner.close();
     }
 
-    private Outcome choiceSubmitted(Choice userChoice) {
+    private Outcome choiceSubmitted(Choice userChoice) throws Exception {
         Random r = new Random();
         Choice computerChoice = Choice.getRandomChoice(r);
         Outcome outcome;
@@ -29,13 +30,20 @@ public class GameLogic {
         while (outcome == Outcome.DRAW) {
             String move = this.scanner.nextLine();
 
+
+            if (move.equals("END")) {
+                throw new Exception();
+            }
+
             userChoice = Choice.parseInput(move);
             computerChoice = Choice.getRandomChoice(r);
             System.out.println("il computer gioca " + computerChoice.toString());
 
             outcome = userChoice.resultAgainst(computerChoice);
             System.out.println(outcome.Message);
+
         }
+
 
         return outcome;
     }
@@ -43,8 +51,17 @@ public class GameLogic {
 
     public void round() {
         String move = this.scanner.nextLine();
-        Choice userChoice = Choice.parseInput(move);
-        Outcome outcome = this.choiceSubmitted(userChoice);
+        while (!move.equals("END")) {
+            Choice userChoice = Choice.parseInput(move);
+            try {
+
+                Outcome outcome = this.choiceSubmitted(userChoice);
+            } catch (Exception e) {
+                break;
+            }
+            move = this.scanner.nextLine();
+        }
+
     }
 
 
