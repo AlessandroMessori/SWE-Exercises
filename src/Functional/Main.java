@@ -55,23 +55,25 @@ class Team {
 
     public float getAverageAge() {
         int sum = players.stream()
-                .mapToInt((Player pl) -> pl.getAge())
+                .mapToInt(Player::getAge)
                 .reduce(0, (int acc, int current) -> acc += current);
 
 
-        return sum / players.size();
+        return (float) sum / players.size();
 
     }
 
     private Team fromStream(Stream<Player> plrs) {
         Team team = new Team();
 
-        plrs.forEach((Player plr) -> team.add(plr));
+        plrs.forEach(team::add);
         return team;
     }
 
     public Team getRoles(Role role) {
-        Stream<Player> plrs = players.stream().filter((Player player) -> player.getRole() == role);
+        Stream<Player> plrs = players
+                .stream()
+                .filter((Player player) -> player.getRole() == role);
         return fromStream(plrs);
     }
 
