@@ -67,7 +67,7 @@ class Caller extends Thread {
     @Override
     public void run() {
 
-        System.out.println("Starting Thread of Caller #"+number);
+        System.out.println("Starting Thread of Caller #" + number);
 
         try {
             call();
@@ -101,10 +101,9 @@ public class Main {
         callers = new ArrayList<>();
 
 
-        initCallers(5);
+        initCallers(new Random().nextInt(10));
 
-        for (Caller caller:callers)
-        {
+        for (Caller caller : callers) {
             caller.start();
         }
 
